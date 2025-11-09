@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soul In Shades — Gallery</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gold: #b58b00;
+        --dark: #111;
+        --light-bg: #fff8e1;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: var(--light-bg);
+        color: var(--dark);
+        line-height: 1.6;
+      }
+
+      header {
+        text-align: center;
+        padding: 20px;
+        border-bottom: 2px solid var(--gold);
+      }
+
+      header img {
+        width: 120px;
+        height: auto;
+        border-radius: 50%;
+        margin-bottom: 5px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      header h1 {
+        font-size: 2em;
+        color: var(--gold);
+        font-family: "Great Vibes", cursive;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      nav {
+        text-align: center;
+        margin: 15px 0;
+      }
+
+      nav a {
+        color: var(--dark);
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: var(--gold);
+      }
+
+      h2 {
+        text-align: center;
+        color: var(--gold);
+        margin: 25px 0;
+      }
+
+      /* Masonry Gallery */
+      /* Masonry Gallery — Pinterest style */
+      .masonry {
+        column-count: 4;
+        column-gap: 1em; /* wider space between columns */
+        padding: 10px;
+      }
+
+      @media (max-width: 1200px) {
+        .masonry {
+          column-count: 3;
+        }
+      }
+      @media (max-width: 800px) {
+        .masonry {
+          column-count: 2;
+        }
+      }
+      @media (max-width: 500px) {
+        .masonry {
+          column-count: 1;
+        }
+      }
+
+      .masonry img {
+        width: 100%;
+        margin-bottom: 1em; /* spacing between rows */
+        border-radius: 10px;
+        border: 2px solid var(--gold);
+        box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        break-inside: avoid; /* ensures Pinterest-style stacking */
+      }
+
+      .masonry img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+      }
+      /* Fade-in animation for images */
+      .masonry img {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .masonry img.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Lightbox */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .lightbox img {
+        max-width: 90%;
+        max-height: 85%;
+        border-radius: 12px;
+        border: 2px solid var(--gold);
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+      }
+
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        color: var(--gold);
+        font-size: 38px;
+        font-weight: bold;
+        cursor: pointer;
+        text-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px;
+        border-top: 1px solid var(--gold);
+        color: #555;
+        font-size: 0.9em;
+        background: #fffbe9;
+      }
+
+      /* WhatsApp Floating Button */
+      .whatsapp-float {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        bottom: 25px;
+        right: 25px;
+        background-color: #25d366;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+      }
+
+      .whatsapp-float img {
+        width: 34px;
+        height: 34px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img
+        src="https://shiny-aqua-jcmrgbtctj.edgeone.app/Gemini_Generated_Image_jwsloijwsloijwsl.png"
+        alt="Soul In Shades Logo"
+      />
+      <h1>My Artwork Gallery</h1>
+    </header>
+
+    <nav>
+      <a href="/#about">About</a>
+      <a href="/gallery" style="color: var(--gold)">Gallery</a>
+      <a href="/#order">Place an Order</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+
+    <h2>Explore my Pencil Sketches</h2>
+
+    <div class="masonry">
+      <!-- All artworks combined here -->
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/208256725_2999072467040759_3549309546277128631_n.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/208986835_800195147301554_4007781255994452656_n.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/212037560_201927371854896_4871350188663320126_n.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/221991833_339206927743305_6773484142152724118_n.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/WhatsApp%20Image%202025-10-28%20at%2019.27.34_7cdef0be.jpg"
+      />
+      <img
+        src="https://handsome-gold-1hahvw5wwk.edgeone.app/IMG-20251103-WA0007.jpg"
+      />
+      <img
+        src="https://grieving-teal-ydiqtlgzuq.edgeone.app/206443371_4279964375401316_1123705458092791610_n.jpg"
+      />
+      <img
+        src="https://vivacious-white-bssq2zeqp9.edgeone.app/206196089_831983071072391_2188369802498420081_n.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/WhatsApp%20Image%202025-10-29%20at%2010.39.56_6d8bfda1.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/WhatsApp%20Image%202025-10-29%20at%2010.39.56_96331c93.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/WhatsApp%20Image%202025-10-29%20at%2010.39.57_9de80a87.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/WhatsApp%20Image%202025-10-29%20at%2010.39.58_8dc2d7b2.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/WhatsApp%20Image%202025-10-29%20at%2010.39.58_b92a1eee.jpg"
+      />
+      <img
+        src="https://boiling-amaranth-6v903rhc1v.edgeone.app/WhatsApp%20Image%202025-10-29%20at%2010.39.59_0faedde8.jpg"
+      />
+      <img
+        src="https://zygotic-apricot-dhxclvl8m9.edgeone.app/204462169_191019332826877_3014507568003199769_n.jpg"
+      />
+      <img
+        src="https://handsome-gold-1hahvw5wwk.edgeone.app/IMG-20251103-WA0005.jpg"
+      />
+      <img
+        src="https://handsome-gold-1hahvw5wwk.edgeone.app/IMG-20251103-WA0004.jpg"
+      />
+      <img
+        src="https://handsome-gold-1hahvw5wwk.edgeone.app/IMG-20251103-WA0006.jpg"
+      />
+      <img
+        src="https://handsome-gold-1hahvw5wwk.edgeone.app/IMG-20251103-WA0008.jpg"
+      />
+      <img
+        src="https://handsome-gold-1hahvw5wwk.edgeone.app/IMG-20251103-WA0009.jpg"
+      />
+      <img
+        src="https://sufficient-olive-jfdmvl0bn8.edgeone.app/WhatsApp%20Image%202025-11-03%20at%2013.45.12_8fddc91c.jpg"
+      />
+    </div>
+
+    <!-- Lightbox for zoom view -->
+    <div class="lightbox" id="lightbox">
+      <span class="close" id="closeBtn">&times;</span>
+      <img id="lightboxImg" src="" alt="Artwork" />
+    </div>
+
+    <footer>
+      © 2025 Soul In Shades — All Rights Reserved <br />
+      Contact:
+      <a
+        href="mailto:soulinshades1@gmail.com"
+        style="color: var(--gold); text-decoration: none"
+        >📧 soulinshades1@gmail.com</a
+      >
+      |
+      <a
+        href="tel:+917981495492"
+        style="color: var(--gold); text-decoration: none"
+        >📞 +91 79814 95492</a
+      >
+
+      <a
+        href="https://wa.me/917981495492"
+        class="whatsapp-float"
+        target="_blank"
+        title="Chat with me on WhatsApp"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+          alt="WhatsApp"
+        />
+      </a>
+    </footer>
+
+    <script>
+      const images = document.querySelectorAll(".masonry img");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const closeBtn = document.getElementById("closeBtn");
+
+      images.forEach((img) => {
+        img.addEventListener("click", () => {
+          lightbox.style.display = "flex";
+          lightboxImg.src = img.src;
+        });
+      });
+
+      closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+      });
+    </script>
+    <script>
+      // Smooth fade-in effect on scroll
+      const galleryImages = document.querySelectorAll(".masonry img");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      galleryImages.forEach((img) => {
+        observer.observe(img);
+      });
+    </script>
+  </body>
+</html>
