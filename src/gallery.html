@@ -201,6 +201,55 @@
         width: 34px;
         height: 34px;
       }
+      .instagram-float {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        bottom: 25px;
+        right: 85px;
+        background-color: #e4405f;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instagram-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.instagram-float img {
+  width: 28px;
+  height: 28px;
+}
+      .youtube-float {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        bottom: 25px;
+        right: 145px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        transition: transform 0.3s ease;
+}
+
+.youtube-float:hover {
+  transform: scale(1.1);
+}
+
+.youtube-float img {
+  width: 32px;
+  height: 32px;
+}
     </style>
   </head>
   <body>
