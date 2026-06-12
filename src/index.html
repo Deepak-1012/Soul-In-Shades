@@ -61,6 +61,31 @@
   width: 28px;
   height: 28px;
 }
+      .youtube-float {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 25px;
+  right: 145px; /* left of Instagram */
+  background-color: #ff0000;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.youtube-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.youtube-float img {
+  width: 30px;
+  height: 30px;
+}
       :root {
         --gold: #b58b00;
         --dark: #111;
@@ -786,6 +811,18 @@
   <img
     src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
     alt="WhatsApp"
+  />
+</a>
+      <!-- YouTube Floating Button -->
+<a
+  href="https://youtube.com/@Soul-in-shades-1012"
+  class="youtube-float"
+  target="_blank"
+  title="Subscribe on YouTube"
+>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png"
+    alt="YouTube"
   />
 </a>
     </footer>
