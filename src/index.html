@@ -67,24 +67,24 @@
         height: 50px;
         bottom: 25px;
         right: 145px;
-        background: #ff0000;
+        background: white;
         border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
         display: flex;
         justify-content: center;
         align-items: center;
-        text-decoration: none;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
         z-index: 999;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .youtube-float:hover {
   transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
 
-.youtube-float i {
-  color: white;
-  font-size: 26px;
+.youtube-float img {
+  width: 32px;
+  height: 32px;
 }
       :root {
         --gold: #b58b00;
@@ -813,15 +813,17 @@
     alt="WhatsApp"
   />
 </a>
-     <!-- YouTube Floating Button -->
+    <!-- YouTube Floating Button -->
 <a
-  href="https://youtube.com/@Soul-in-shades-1012
-"
+  href="https://youtube.com/@Soul-in-shades-1012"
   class="youtube-float"
   target="_blank"
   title="Subscribe on YouTube"
 >
-  <i class="fa fa-youtube-play"></i>
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+    alt="YouTube"
+  />
 </a>
     </footer>
 
