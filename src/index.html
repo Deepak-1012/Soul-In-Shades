@@ -779,7 +779,7 @@
 
       persons.addEventListener("change", () => {
         const val = parseInt(persons.value) || 0;
-        baseCharge = val * 70;
+        baseCharge = val * 100;
         charge = baseCharge + deliveryCharge;
         postResult.textContent = `Base charge: ₹${baseCharge}, Total (approx): ₹${charge}`;
       });
