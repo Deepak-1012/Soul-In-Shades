@@ -37,7 +37,30 @@
         height: 34px;
         filter: brightness(1) invert(0);
       }
+      .instagram-float {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        bottom: 25px;
+        right: 85px;
+        background-color: #e4405f;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.instagram-float:hover {
+  transform: scale(1.1);
+}
+
+.instagram-float img {
+  width: 28px;
+  height: 28px;
+}
       :root {
         --gold: #b58b00;
         --dark: #111;
@@ -740,18 +763,31 @@
         >+91 79814 95492</a
       >
 
-      <!-- 🟢 WhatsApp Floating Button -->
-      <a
-        href="https://wa.me/917981495492"
-        class="whatsapp-float"
-        target="_blank"
-        title="Chat with me on WhatsApp"
-      >
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-          alt="WhatsApp"
-        />
-      </a>
+      <!-- Instagram Floating Button -->
+<a
+  href="https://instagram.com/soul.101296"
+  class="instagram-float"
+  target="_blank"
+  title="Follow me on Instagram"
+>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+    alt="Instagram"
+  />
+</a>
+
+<!-- WhatsApp Floating Button -->
+<a
+  href="https://wa.me/917981495492"
+  class="whatsapp-float"
+  target="_blank"
+  title="Chat with me on WhatsApp"
+>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+    alt="WhatsApp"
+  />
+</a>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
