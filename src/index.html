@@ -887,7 +887,14 @@
           const address = document.getElementById("address").value;
           const pincode = document.getElementById("pincode").value;
           const personCount = document.getElementById("personCount").value;
-          const customerUPI = document.getElementById("upi").value;
+          const customerUPI = document.getElementById("upi").value.trim();
+
+          if (customerUPI.length < 10) {
+            alert("Please enter a valid UPI Transaction ID.");
+            resetSubmit(submitBtn);
+            return;
+            }
+
           const photoFile = document.getElementById("photo").files[0];
 
           if (!photoFile) {
