@@ -754,8 +754,7 @@
 
           <div class="upi-details" id="upiDetails">
             <div id="qr-code" class="qr-code"></div>
-            or
-            <div id="link" class="link"></div>
+
             <label for="upi"
               >UPI Transaction ID (for payment confirmation):</label
             ><br />
@@ -1001,9 +1000,6 @@
           colorLight: "#fff",
           correctLevel: QRCode.CorrectLevel.H,
         });
-        document.getElementById(
-          "link"
-        ).innerHTML = `<a href=${text}>Click here to proceed payment</a>`;
       }
     </script>
   </body>
