@@ -543,6 +543,30 @@
     </section>
 
     <style>
+      .payment-guidelines {
+        background: #fffdf3;
+        border: 1px solid #b58b00;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px auto;
+        max-width: 700px;
+        text-align: left;
+}
+
+      .payment-guidelines h3 {
+        color: #b58b00;
+        margin-bottom: 10px;
+        text-align: center;
+}
+
+      .payment-guidelines ul {
+          padding-left: 20px;
+}
+
+      .payment-guidelines li {
+          margin-bottom: 8px;
+          line-height: 1.5;
+}
       #gallery {
         text-align: center;
         color: var(--gold);
@@ -753,18 +777,33 @@
           <button type="button" id="payNowBtn">Pay Now</button>
 
           <div class="upi-details" id="upiDetails">
-            <div id="qr-code" class="qr-code"></div>
 
-            <label for="upi"
-              >UPI Transaction ID (for payment confirmation):</label
-            ><br />
-            <input
-              type="text"
-              id="upi"
-              placeholder="Enter UPI Transaction ID"
-              required
-            />
-          </div>
+    <div class="payment-guidelines">
+        <h3>📌 Payment Instructions</h3>
+        <ul>
+            <li>Fill all your details before making the payment.</li>
+            <li>If you are using a mobile phone, take a screenshot of this page after filling all the details.</li>
+            <li>Open PhonePe, Google Pay, Paytm, or any UPI payment app.</li>
+            <li>Tap <b>Scan & Pay</b> and choose <b>Upload QR from Gallery</b>.</li>
+            <li>Select the screenshot containing the QR code.</li>
+            <li>Complete the payment.</li>
+            <li>Enter the exact UPI Transaction ID below.</li>
+            <li><b>Orders with invalid Transaction IDs will be rejected.</b></li>
+        </ul>
+    </div>
+
+    <div id="qr-code" class="qr-code"></div>
+
+    <label for="upi">
+        UPI Transaction ID (for payment confirmation):
+    </label><br />
+    <input
+        type="text"
+        id="upi"
+        placeholder="Enter UPI Transaction ID"
+        required
+    />
+</div>
         </div>
 
         <button type="submit">Submit Order</button>
