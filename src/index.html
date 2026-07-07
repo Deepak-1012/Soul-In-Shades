@@ -346,7 +346,8 @@
         src="https://shiny-aqua-jcmrgbtctj.edgeone.app/Gemini_Generated_Image_jwsloijwsloijwsl.png"
         alt="Soul In Shades Logo"
       />
-      <h1>Soul In Shades</h1>
+      
+      <h1 class="writing-text">Soul In Shades</h1>
       <p>From My Pencil to Your Heart</p>
     </div>
     <div class="loading-overlay" id="loadingOverlay">
@@ -551,6 +552,45 @@
     </section>
 
     <style>
+      <style>
+  /* Existing CSS */
+
+  #splash-screen {
+      ...
+  }
+
+  /* Paste SVG animation CSS here */
+  .svg-text {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 4s linear forwards;
+  }
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+</style>
+      .pencil {
+        width: 30px;
+        height: 6px;
+        background: #333;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        animation: write 3s linear forwards;
+      }
+
+      @keyframes write {
+        from {
+          left: 20%;
+        }
+        to {
+          left: 80%;
+        }
+      }
       #splash-screen {
       position: fixed;
       top: 0;
