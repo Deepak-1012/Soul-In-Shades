@@ -8,6 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
+app.use(express.static(path.join(__dirname, "../public")));
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -18,11 +19,17 @@ const transporter = nodemailer.createTransport({
 });
 
 app.get("/", (req, res) => {
-  return res.sendFile(path.join(__dirname, "index.html"));
+  return res.sendFile(path.join(__dirname, "../public/index.html"));
 });
+
 app.get("/gallery", (req, res) => {
-  return res.sendFile(path.join(__dirname, "gallery.html"));
+  return res.sendFile(path.join(__dirname, "../public/gallery.html"));
 });
+
+app.get("/reviews", (req, res) => {
+  return res.sendFile(path.join(__dirname, "../public/reviews.html"));
+});
+
 
 app.post("/", async (req, res) => {
   try {
