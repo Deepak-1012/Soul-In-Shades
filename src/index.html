@@ -1077,23 +1077,41 @@
 
       checkPostBtn.addEventListener("click", () => {
         const pincode = document.getElementById("pincode").value.trim();
+      
         if (!/^\d{6}$/.test(pincode)) {
           postResult.textContent = "Please enter a valid 6-digit pincode.";
           postResult.style.color = "red";
           return;
-        }
+  }
 
-        const anandapuramPin = 530052;
-        const distance = Math.abs(parseInt(pincode) - anandapuramPin);
-        deliveryCharge = 30;
-        if (distance > 200) deliveryCharge = 50;
-        if (distance > 1000) deliveryCharge = 70;
-        if (distance > 2000) deliveryCharge = 90;
-        charge = baseCharge + deliveryCharge;
+        // Visakhapatnam District
+        if (
+          pincode.startsWith("530") ||
+          pincode.startsWith("531")
+        ) {
+          deliveryCharge = 35;
+  }
 
-        postResult.style.color = "var(--dark)";
-        postResult.textContent = `Estimated total: ₹${charge} (Base ₹${baseCharge} + Delivery ₹${deliveryCharge})`;
-      });
+  // Andhra Pradesh (excluding Vizag)
+        else if (
+          pincode.startsWith("51") ||
+          pincode.startsWith("52") ||
+          pincode.startsWith("53")
+  ) {
+    deliveryCharge = 45;
+  }
+
+  // Rest of India
+        else {
+          deliveryCharge = 65;
+  }
+
+    charge = baseCharge + deliveryCharge;
+  
+    postResult.style.color = "green";
+    postResult.textContent =
+      `Estimated total: ₹${charge} (Base ₹${baseCharge} + Delivery ₹${deliveryCharge})`;
+});
 
       function generateQR() {
         const text = `upi://pay?pa=7981495492@ibl&pn=Deepak&am=${charge}&cu=INR&tn=DrawingFee`;
