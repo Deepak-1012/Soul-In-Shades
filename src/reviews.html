@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews | Soul In Shades</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#fff8e1;
+            margin:0;
+            padding:20px;
+        }
+
+        .container{
+            max-width:900px;
+            margin:auto;
+        }
+	.home-btn{
+    	display:inline-block;
+    	padding:10px 15px;
+    	background:#ff9800;
+    	color:white;
+    	text-decoration:none;
+    	border-radius:5px;
+    	margin-bottom:20px;
+	}
+        h1{
+            text-align:center;
+            color:#333;
+        }
+
+        .review-form{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom:30px;
+        }
+
+        input, textarea{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid #ccc;
+            border-radius:5px;
+            box-sizing:border-box;
+        }
+
+        textarea{
+            height:120px;
+            resize:none;
+        }
+
+        .stars{
+            font-size:30px;
+            cursor:pointer;
+            color:#ccc;
+            margin:10px 0;
+        }
+
+        .stars span.active{
+            color:gold;
+        }
+
+        button{
+            background:#ff9800;
+            color:white;
+            border:none;
+            padding:12px 25px;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#e68900;
+        }
+
+        .review-card{
+            background:white;
+            padding:15px;
+            margin-bottom:15px;
+            border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .rating{
+            color:gold;
+            font-size:20px;
+        }
+
+        #averageRating{
+            text-align:center;
+            font-size:22px;
+            margin-bottom:20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+	
+     <a href="index.html">🏠 Back to Home</a>
+    <h1>⭐ Customer Reviews</h1>
+
+    <div id="averageRating">
+        Average Rating: Loading...
+    </div>
+
+    <div class="review-form">
+
+        <input type="text" id="name" placeholder="Your Name">
+
+        <div class="stars" id="stars">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+        </div>
+
+        <textarea id="reviewText" placeholder="Write your review"></textarea>
+
+        <button onclick="submitReview()">
+            Submit Review
+        </button>
+
+    </div>
+
+    <div id="reviewsContainer"></div>
+
+</div>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
+  authDomain: "soul-in-shades.firebaseapp.com",
+  projectId: "soul-in-shades",
+  storageBucket: "soul-in-shades.firebasestorage.app",
+  messagingSenderId: "243873489165",
+  appId: "1:243873489165:web:4737be5809db7bca2c5044"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let selectedRating = 0;
+
+const stars = document.querySelectorAll("#stars span");
+
+stars.forEach(star => {
+    star.addEventListener("click", () => {
+        selectedRating = parseInt(star.dataset.value);
+
+        stars.forEach(s => s.classList.remove("active"));
+
+        for(let i = 0; i < selectedRating; i++){
+            stars[i].classList.add("active");
+        }
+    });
+});
+
+window.submitReview = async function () {
+
+    const name = document.getElementById("name").value.trim();
+    const reviewText = document.getElementById("reviewText").value.trim();
+
+    if(!name || !reviewText || selectedRating === 0){
+        alert("Please fill all fields and select rating");
+        return;
+    }
+
+    try{
+
+        await addDoc(collection(db,"reviews"),{
+            name,
+            reviewText,
+            rating:selectedRating,
+            createdAt:Date.now()
+        });
+
+        alert("Review submitted successfully!");
+
+        document.getElementById("name").value="";
+        document.getElementById("reviewText").value="";
+        selectedRating=0;
+
+        stars.forEach(s=>s.classList.remove("active"));
+
+        loadReviews();
+
+    }catch(err){
+        console.error(err);
+        alert("Error submitting review");
+    }
+}
+
+async function loadReviews(){
+
+    const reviewsContainer =
+        document.getElementById("reviewsContainer");
+
+    reviewsContainer.innerHTML="";
+
+    const q = query(
+        collection(db,"reviews"),
+        orderBy("createdAt","desc")
+    );
+
+    const snapshot = await getDocs(q);
+
+    let total = 0;
+    let count = 0;
+
+    snapshot.forEach(doc => {
+
+        const data = doc.data();
+
+        total += data.rating;
+        count++;
+
+        reviewsContainer.innerHTML += `
+            <div class="review-card">
+                <h3>${data.name}</h3>
+                <div class="rating">
+                    ${"★".repeat(data.rating)}
+                </div>
+                <p>${data.reviewText}</p>
+            </div>
+        `;
+    });
+
+    document.getElementById("averageRating").innerHTML =
+        count > 0
+        ? `Average Rating: ${(total/count).toFixed(1)} / 5 ⭐`
+        : "No Reviews Yet";
+}
+
+loadReviews();
+
+</script>
+</body>
+</html>
