@@ -121,11 +121,16 @@
             <span data-value="5">★</span>
         </div>
 
-        <textarea id="reviewText" placeholder="Write your review"></textarea>
+	<textarea id="reviewText" placeholder="Write your review"></textarea>
 
-        <button onclick="submitReview()">
-            Submit Review
-        </button>
+	<input
+    	  type="file"
+    	  id="reviewImage"
+    	  accept="image/png,image/jpeg,image/webp">
+
+	<button onclick="submitReview()">
+    	  Submit Review
+	</button>
 
     </div>
 
@@ -134,7 +139,9 @@
 </div>
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 import {
     getFirestore,
     collection,
@@ -142,16 +149,20 @@ import {
     getDocs,
     query,
     orderBy
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
-  authDomain: "soul-in-shades.firebaseapp.com",
-  projectId: "soul-in-shades",
-  storageBucket: "soul-in-shades.firebasestorage.app",
-  messagingSenderId: "243873489165",
-  appId: "1:243873489165:web:4737be5809db7bca2c5044"
+
+    apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
+    authDomain: "soul-in-shades.firebaseapp.com",
+    projectId: "soul-in-shades",
+    storageBucket: "soul-in-shades.firebasestorage.app",
+    messagingSenderId: "243873489165",
+    appId: "1:243873489165:web:4737be5809db7bca2c5044"
+
 };
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -175,35 +186,71 @@ window.submitReview = async function () {
 
     const name = document.getElementById("name").value.trim();
     const reviewText = document.getElementById("reviewText").value.trim();
+    const file = document.getElementById("reviewImage").files[0];
 
-    if(!name || !reviewText || selectedRating === 0){
-        alert("Please fill all fields and select rating");
+    let imageUrl = "";
+
+    if (!name || !reviewText || selectedRating === 0) {
+        alert("Please fill all fields and select a rating.");
         return;
     }
 
-    try{
+    try {
 
-        await addDoc(collection(db,"reviews"),{
-            name,
-            reviewText,
-            rating:selectedRating,
-            createdAt:Date.now()
+        if (file) {
+
+            if (file.size > 2 * 1024 * 1024) {
+                alert("Please upload an image smaller than 2 MB.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "review_uploads");
+
+            const response = await fetch(
+                "https://api.cloudinary.com/v1_1/mx5v8ppn/image/upload",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const result = await response.json();
+
+            if (!result.secure_url) {
+                console.error(result);
+                alert("Image upload failed.");
+                return;
+            }
+
+            imageUrl = result.secure_url;
+        }
+
+        await addDoc(collection(db, "reviews"), {
+            name: name,
+            reviewText: reviewText,
+            rating: selectedRating,
+            imageUrl: imageUrl,
+            createdAt: Date.now()
         });
 
         alert("Review submitted successfully!");
 
-        document.getElementById("name").value="";
-        document.getElementById("reviewText").value="";
-        selectedRating=0;
+        document.getElementById("name").value = "";
+        document.getElementById("reviewText").value = "";
+        document.getElementById("reviewImage").value = "";
 
-        stars.forEach(s=>s.classList.remove("active"));
+        selectedRating = 0;
+        stars.forEach(s => s.classList.remove("active"));
 
         loadReviews();
 
-    }catch(err){
+    } catch (err) {
         console.error(err);
-        alert("Error submitting review");
+        alert("Error submitting review.");
     }
+
 }
 
 async function loadReviews(){
@@ -230,15 +277,35 @@ async function loadReviews(){
         total += data.rating;
         count++;
 
-        reviewsContainer.innerHTML += `
-            <div class="review-card">
-                <h3>${data.name}</h3>
-                <div class="rating">
-                    ${"★".repeat(data.rating)}
-                </div>
-                <p>${data.reviewText}</p>
-            </div>
-        `;
+reviewsContainer.innerHTML += `
+<div class="review-card">
+
+    <h3>${data.name}</h3>
+
+    <div class="rating">
+        ${"★".repeat(data.rating)}
+    </div>
+
+    <p>${data.reviewText}</p>
+
+    ${
+        data.imageUrl
+        ? `<img
+              src="${data.imageUrl}"
+              alt="Customer Review"
+              style="
+                  width:100%;
+                  max-width:300px;
+                  border-radius:10px;
+                  margin-top:10px;
+                  cursor:pointer;
+              "
+          >`
+        : ""
+    }
+
+</div>
+`;
     });
 
     document.getElementById("averageRating").innerHTML =
