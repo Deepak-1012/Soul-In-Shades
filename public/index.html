@@ -10,6 +10,51 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
+	#miniReviews{
+    max-width:900px;
+    margin:50px auto;
+    text-align:center;
+}
+
+.reviews-slider{
+    overflow:hidden;
+    width:100%;
+}
+
+#reviewsTrack{
+    display:flex;
+    gap:20px;
+    width:max-content;
+    animation:scrollReviews 25s linear infinite;
+}
+
+.mini-review{
+    width:280px;
+    background:#fff;
+    padding:18px;
+    border-radius:12px;
+    border:1px solid #d4af37;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.mini-review h4{
+    margin-bottom:8px;
+}
+
+.stars{
+    color:gold;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+@keyframes scrollReviews{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
       /* 🟢 WhatsApp Floating Button */
       .whatsapp-float {
         position: fixed;
@@ -670,6 +715,62 @@
           opacity: 1;
         }
       }
+   #miniReviews{
+     max-width:900px;
+     margin:40px auto;
+     text-align:center;
+}
+
+	.reviews-slider{
+    	overflow:hidden;
+    	position:relative;
+    	height:10px 0;
+}
+
+#reviewsTrack{
+    display:flex;
+    gap:20px;
+    animation:scrollReviews 25s linear infinite;
+    width:max-content;
+}
+
+.mini-review{
+    min-width:280px;
+    max-width:280px;
+    min-height:220px; /* instead of fixed small height */
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid #d4af37;
+    box-shadow:0 0 10px rgba(212,175,55,0.25);
+    text-align:left;
+}
+
+.mini-review h4{
+    margin-bottom:5px;
+    color:#333;
+}
+
+.mini-review .stars{
+    color:gold;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.mini-review p{
+    color:#555;
+    font-size:14px;
+    line-height:1.5;
+}
+
+@keyframes scrollReviews{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
     </style>
 
     <script>
@@ -693,6 +794,13 @@
       });
     </script>
     <section id="order">
+    <section id="miniReviews">
+    <h2>❤️ Customer Reviews</h2>
+
+    <div class="reviews-slider">
+        <div id="reviewsTrack"></div>
+    </div>
+</section>
       <h2>Place an Order</h2>
       <p>
         Fill in your details and upload your photo. We'll contact you shortly!
@@ -1068,6 +1176,66 @@
         });
       }
     </script>
+<script type="module">
 
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    orderBy,
+    limit
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
+    authDomain: "soul-in-shades.firebaseapp.com",
+    projectId: "soul-in-shades",
+    storageBucket: "soul-in-shades.firebasestorage.app",
+    messagingSenderId: "243873489165",
+    appId: "1:243873489165:web:4737be5809db7bca2c5044"
+
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadMiniReviews() {
+
+    const track = document.getElementById("reviewsTrack");
+
+    const q = query(
+        collection(db, "reviews"),
+        orderBy("createdAt", "desc"),
+        limit(10)
+    );
+
+    const snapshot = await getDocs(q);
+
+    let html = "";
+
+    snapshot.forEach(doc => {
+
+        const data = doc.data();
+
+        html += `
+        <div class="mini-review">
+            <h4>${data.name}</h4>
+            <div class="stars">${"★".repeat(data.rating)}</div>
+            <p>${data.reviewText}</p>
+        </div>`;
+    });
+
+    track.innerHTML = html + html;
+}
+
+loadMiniReviews();
+
+</script>
   </body>
+   
 </html>
