@@ -6,6 +6,91 @@
     <title>Customer Reviews | Soul In Shades</title>
 
     <style>
+	/* Lightbox */
+
+	.lightbox{
+    	display:none;
+    	position:fixed;
+    	inset:0;
+    	background:rgba(0,0,0,0.85);
+    	z-index:9999;
+    	justify-content:center;
+    	align-items:center;
+    	padding:20px;
+}
+
+	.lightbox-content{
+    	position:relative;
+    	max-width:700px;
+    	width:100%;
+    	background:white;
+    	border-radius:15px;
+    	overflow:hidden;
+
+    	border:3px solid gold;
+
+    	box-shadow:
+        	0 0 15px gold,
+        	0 0 30px gold,
+        	0 0 50px rgba(255,215,0,0.7);
+}
+
+	.lightbox-content img{
+    	width:100%;
+    	max-height:70vh;
+    	object-fit:contain;
+    	background:#fff8e1;
+}
+
+	.lightbox-details{
+    	padding:20px;
+    	text-align:center;
+}
+
+	.lightbox-details h3{
+    	margin:0 0 10px;
+}
+
+	.lightbox-details p{
+    	margin-top:10px;
+    	color:#444;
+    	line-height:1.6;
+}
+
+	.close-lightbox{
+    	position:absolute;
+    	top:10px;
+    	right:15px;
+    	font-size:35px;
+    	font-weight:bold;
+    	color:white;
+    	background:#ff9800;
+    	width:45px;
+    	height:45px;
+    	border-radius:50%;
+    	display:flex;
+    	justify-content:center;
+    	align-items:center;
+    	cursor:pointer;
+    	z-index:10000;
+}
+
+	.close-lightbox:hover{
+    	background:#e68900;
+}
+
+	.review-image{
+    	width:100%;
+    	max-width:300px;
+    	border-radius:10px;
+    	margin-top:10px;
+    	cursor:pointer;
+    	transition:0.3s;
+}
+
+	.review-image:hover{
+    	transform:scale(1.03);
+}
         body{
             font-family: Arial, sans-serif;
             background:#fff8e1;
@@ -137,6 +222,19 @@
     <div id="reviewsContainer"></div>
 
 </div>
+<div id="reviewLightbox" class="lightbox">
+    <div class="lightbox-content">
+        <span class="close-lightbox">&times;</span>
+
+        <img id="lightboxImage" src="" alt="Review Image">
+
+        <div class="lightbox-details">
+            <h3 id="lightboxName"></h3>
+            <div id="lightboxRating"></div>
+            <p id="lightboxReview"></p>
+        </div>
+    </div>
+</div>
 <script type="module">
 
 import { initializeApp }
@@ -250,6 +348,25 @@ window.submitReview = async function () {
         stars.forEach(s => s.classList.remove("active"));
 
         loadReviews();
+	setTimeout(() => {
+
+    document.querySelector(".close-lightbox")
+    ?.addEventListener("click", () => {
+
+        document.getElementById("reviewLightbox").style.display = "none";
+
+    });
+
+    document.getElementById("reviewLightbox")
+    ?.addEventListener("click", (e) => {
+
+        if (e.target.id === "reviewLightbox") {
+            document.getElementById("reviewLightbox").style.display = "none";
+        }
+
+    });
+
+}, 500);
 
     } catch (err) {
         console.error(err);
@@ -299,22 +416,23 @@ reviewsContainer.innerHTML += `
 
     <p>${data.reviewText}</p>
 
-    ${
-        data.imageUrl
-        ? `<img
-              src="${data.imageUrl}"
-              alt="Customer Review"
-              style="
-                  width:100%;
-                  max-width:300px;
-                  border-radius:10px;
-                  margin-top:10px;
-                  cursor:pointer;
-              "
-          >`
-        : ""
-    }
-
+${
+    data.imageUrl
+    ? `
+    <img
+        src="${data.imageUrl}"
+        alt="Customer Review"
+        class="review-image"
+        onclick="openLightbox(
+            '${data.imageUrl}',
+            '${data.name.replace(/'/g,"\\'")}',
+            '${"★".repeat(data.rating)}',
+            '${data.reviewText.replace(/'/g,"\\'")}'
+        )"
+    >
+    `
+    : ""
+}
 </div>
 `;
     });
@@ -326,6 +444,39 @@ reviewsContainer.innerHTML += `
 }
 
 loadReviews();
+window.openLightbox = function(image,name,rating,review){
+
+    document.getElementById("lightboxImage").src = image;
+
+    document.getElementById("lightboxName").textContent = name;
+
+    document.getElementById("lightboxRating").innerHTML =
+        `<span style="color:gold;font-size:22px">${rating}</span>`;
+
+    document.getElementById("lightboxReview").textContent =
+        review;
+
+    document.getElementById("reviewLightbox").style.display =
+        "flex";
+};
+
+document.querySelector(".close-lightbox")
+.addEventListener("click", () => {
+
+    document.getElementById("reviewLightbox").style.display =
+        "none";
+
+});
+
+document.getElementById("reviewLightbox")
+.addEventListener("click", (e) => {
+
+    if(e.target.id === "reviewLightbox"){
+
+        document.getElementById("reviewLightbox").style.display =
+            "none";
+    }
+});
 
 </script>
 </body>
