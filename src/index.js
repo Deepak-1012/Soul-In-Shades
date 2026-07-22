@@ -8,72 +8,6 @@ const path = require("path");
 
 const app = express();
 
-const PINCODE_API = "https://api.pincodeapi.in/api/v1/pincode";
-const ORIGIN_PINCODE = "530052";
-
-const haversine = (lat1, lon1, lat2, lon2) => {
-  const earthRadiusKm = 6371;
-  const toRad = (degrees) => (degrees * Math.PI) / 180;
-  const dLat = toRad(lat2 - lat1);
-  const dLon = toRad(lon2 - lon1);
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
-
-  return 2 * earthRadiusKm * Math.asin(Math.sqrt(Math.min(1, Math.max(0, a))));
-};
-
-const getFirstPincodeRecord = async (pincode) => {
-  const response = await fetch(`${PINCODE_API}/${pincode}`, {
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!response.ok) {
-    const body = await response.text().catch(() => "");
-    console.error("Pincode API error", {
-      pincode,
-      status: response.status,
-      body: body.slice(0, 300),
-    });
-    throw new Error(`Pincode lookup failed with status ${response.status}`);
-  }
-
-  const result = await response.json();
-  const record =
-    result?.status === "success"
-      ? result.data?.find(
-          (item) =>
-            item.latitude !== null &&
-            item.longitude !== null &&
-            item.latitude !== "" &&
-            item.longitude !== "" &&
-            Number.isFinite(Number(item.latitude)) &&
-            Number.isFinite(Number(item.longitude)),
-        )
-      : null;
-  if (
-    !record ||
-    !Number.isFinite(record.latitude) ||
-    !Number.isFinite(record.longitude)
-  ) {
-    throw new Error("No coordinates found for this pincode");
-  }
-
-  return {
-    ...record,
-    latitude: Number(record.latitude),
-    longitude: Number(record.longitude),
-  };
-};
-
-const getDeliveryCharge = (distanceKm) => {
-  if (distanceKm <= 20) return 35;
-  if (distanceKm < 100) return 50;
-  if (distanceKm < 200) return 70;
-  if (distanceKm < 1000) return 100;
-  if (distanceKm < 2000) return 200;
-  return null;
-};
-
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
@@ -139,24 +73,17 @@ app.post("/", async (req, res) => {
         .json({ success: false, error: "Invalid person count" });
     }
 
-    const [origin, destination] = await Promise.all([
-      getFirstPincodeRecord(ORIGIN_PINCODE),
-      getFirstPincodeRecord(String(pincode)),
-    ]);
-    const distanceKm =
-      haversine(
-        origin.latitude,
-        origin.longitude,
-        destination.latitude,
-        destination.longitude,
-      ) * 0.25;
-    const calculatedDeliveryCharge = getDeliveryCharge(distanceKm);
-
-    if (calculatedDeliveryCharge === null) {
-      return res.status(400).json({
-        success: false,
-        error: "Delivery is unavailable beyond 2000 km",
-      });
+    let calculatedDeliveryCharge;
+    if (String(pincode).startsWith("530") || String(pincode).startsWith("531")) {
+      calculatedDeliveryCharge = 35;
+    } else if (
+      String(pincode).startsWith("51") ||
+      String(pincode).startsWith("52") ||
+      String(pincode).startsWith("53")
+    ) {
+      calculatedDeliveryCharge = 45;
+    } else {
+      calculatedDeliveryCharge = 65;
     }
 
     const calculatedBaseCharge = personCount * 100;
@@ -184,9 +111,6 @@ ${persons}
 
 Transaction ID:
 ${tid}
-
-Distance:
-${distanceKm.toFixed(1)} km
 
 Base Price:
 ₹${base_charge}
@@ -219,7 +143,6 @@ Total:
     res.json({
       success: true,
       message: "Order email sent",
-      distanceKm: Number(distanceKm.toFixed(1)),
       deliveryCharge: calculatedDeliveryCharge,
     });
   } catch (error) {

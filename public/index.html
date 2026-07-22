@@ -1218,6 +1218,24 @@
           return;
         }
 
+        if (pincode.startsWith("530") || pincode.startsWith("531")) {
+          deliveryCharge = 35;
+        } else if (
+          pincode.startsWith("51") ||
+          pincode.startsWith("52") ||
+          pincode.startsWith("53")
+        ) {
+          deliveryCharge = 45;
+        } else {
+          deliveryCharge = 65;
+        }
+
+        charge = baseCharge + deliveryCharge;
+        postResult.style.color = "green";
+        postResult.textContent =
+          `Estimated total: Rs.${charge} (Base Rs.${baseCharge} + Delivery Rs.${deliveryCharge})`;
+        return;
+
         checkPostBtn.disabled = true;
         postResult.style.color = "var(--dark)";
         postResult.textContent = "Calculating delivery distance...";
