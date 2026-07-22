@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,51 +10,51 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-	#miniReviews{
-    max-width:900px;
-    margin:50px auto;
-    text-align:center;
-}
+      #miniReviews {
+        max-width: 900px;
+        margin: 50px auto;
+        text-align: center;
+      }
 
-.reviews-slider{
-    overflow:hidden;
-    width:100%;
-}
+      .reviews-slider {
+        overflow: hidden;
+        width: 100%;
+      }
 
-#reviewsTrack{
-    display:flex;
-    gap:20px;
-    width:max-content;
-    animation:scrollReviews 25s linear infinite;
-}
+      #reviewsTrack {
+        display: flex;
+        gap: 20px;
+        width: max-content;
+        animation: scrollReviews 25s linear infinite;
+      }
 
-.mini-review{
-    width:280px;
-    background:#fff;
-    padding:18px;
-    border-radius:12px;
-    border:1px solid #d4af37;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-}
+      .mini-review {
+        width: 280px;
+        background: #fff;
+        padding: 18px;
+        border-radius: 12px;
+        border: 1px solid #d4af37;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
 
-.mini-review h4{
-    margin-bottom:8px;
-}
+      .mini-review h4 {
+        margin-bottom: 8px;
+      }
 
-.stars{
-    color:gold;
-    font-size:18px;
-    margin-bottom:10px;
-}
+      .stars {
+        color: gold;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
 
-@keyframes scrollReviews{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(-50%);
-    }
-}
+      @keyframes scrollReviews {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
       /* 🟢 WhatsApp Floating Button */
       .whatsapp-float {
         position: fixed;
@@ -69,7 +69,9 @@
         justify-content: center;
         align-items: center;
         z-index: 999;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
       .whatsapp-float:hover {
@@ -95,17 +97,19 @@
         justify-content: center;
         align-items: center;
         z-index: 999;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
 
-.instagram-float:hover {
-  transform: scale(1.1);
-}
+      .instagram-float:hover {
+        transform: scale(1.1);
+      }
 
-.instagram-float img {
-  width: 28px;
-  height: 28px;
-}
+      .instagram-float img {
+        width: 28px;
+        height: 28px;
+      }
       .youtube-float {
         position: fixed;
         width: 50px;
@@ -119,18 +123,20 @@
         justify-content: center;
         align-items: center;
         z-index: 999;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
 
-.youtube-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
-}
+      .youtube-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+      }
 
-.youtube-float img {
-  width: 32px;
-  height: 32px;
-}
+      .youtube-float img {
+        width: 32px;
+        height: 32px;
+      }
       :root {
         --gold: #b58b00;
         --dark: #111;
@@ -386,7 +392,6 @@
     </style>
   </head>
   <body>
-    
     <div class="loading-overlay" id="loadingOverlay">
       <div class="loading-spinner">
         <div class="spinner"></div>
@@ -590,7 +595,7 @@
     </section>
 
     <style>
-           .payment-guidelines {
+      .payment-guidelines {
         background: #fffdf3;
         border: 1px solid #b58b00;
         border-radius: 10px;
@@ -598,22 +603,22 @@
         margin: 15px auto;
         max-width: 700px;
         text-align: left;
-}
+      }
 
       .payment-guidelines h3 {
         color: #b58b00;
         margin-bottom: 10px;
         text-align: center;
-}
+      }
 
       .payment-guidelines ul {
-          padding-left: 20px;
-}
+        padding-left: 20px;
+      }
 
       .payment-guidelines li {
-          margin-bottom: 8px;
-          line-height: 1.5;
-}
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
       #gallery {
         text-align: center;
         color: var(--gold);
@@ -649,7 +654,9 @@
         border-radius: 12px;
         border: 2px solid var(--gold);
         box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
         cursor: pointer;
       }
 
@@ -715,62 +722,62 @@
           opacity: 1;
         }
       }
-   #miniReviews{
-     max-width:900px;
-     margin:40px auto;
-     text-align:center;
-}
+      #miniReviews {
+        max-width: 900px;
+        margin: 40px auto;
+        text-align: center;
+      }
 
-	.reviews-slider{
-    	overflow:hidden;
-    	position:relative;
-    	height:10px 0;
-}
+      .reviews-slider {
+        overflow: hidden;
+        position: relative;
+        height: 10px 0;
+      }
 
-#reviewsTrack{
-    display:flex;
-    gap:20px;
-    animation:scrollReviews 25s linear infinite;
-    width:max-content;
-}
+      #reviewsTrack {
+        display: flex;
+        gap: 20px;
+        animation: scrollReviews 25s linear infinite;
+        width: max-content;
+      }
 
-.mini-review{
-    min-width:280px;
-    max-width:280px;
-    min-height:220px; /* instead of fixed small height */
-    background:white;
-    padding:15px;
-    border-radius:12px;
-    border:1px solid #d4af37;
-    box-shadow:0 0 10px rgba(212,175,55,0.25);
-    text-align:left;
-}
+      .mini-review {
+        min-width: 280px;
+        max-width: 280px;
+        min-height: 220px; /* instead of fixed small height */
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #d4af37;
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+        text-align: left;
+      }
 
-.mini-review h4{
-    margin-bottom:5px;
-    color:#333;
-}
+      .mini-review h4 {
+        margin-bottom: 5px;
+        color: #333;
+      }
 
-.mini-review .stars{
-    color:gold;
-    font-size:18px;
-    margin-bottom:8px;
-}
+      .mini-review .stars {
+        color: gold;
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
 
-.mini-review p{
-    color:#555;
-    font-size:14px;
-    line-height:1.5;
-}
+      .mini-review p {
+        color: #555;
+        font-size: 14px;
+        line-height: 1.5;
+      }
 
-@keyframes scrollReviews{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(-50%);
-    }
-}
+      @keyframes scrollReviews {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
     </style>
 
     <script>
@@ -794,13 +801,13 @@
       });
     </script>
     <section id="order">
-    <section id="miniReviews">
-    <h2>❤️ Customer Reviews</h2>
+      <section id="miniReviews">
+        <h2>❤️ Customer Reviews</h2>
 
-    <div class="reviews-slider">
-        <div id="reviewsTrack"></div>
-    </div>
-</section>
+        <div class="reviews-slider">
+          <div id="reviewsTrack"></div>
+        </div>
+      </section>
       <h2>Place an Order</h2>
       <p>
         Fill in your details and upload your photo. We'll contact you shortly!
@@ -887,33 +894,42 @@
           <button type="button" id="payNowBtn">Pay Now</button>
 
           <div class="upi-details" id="upiDetails">
+            <div class="payment-guidelines">
+              <h3>📌 Payment Instructions</h3>
+              <ul>
+                <li>Fill all your details before making the payment.</li>
+                <li>
+                  If you are using a mobile phone, take a screenshot of this QR
+                  after filling all the details.
+                </li>
+                <li>
+                  Open PhonePe, Google Pay, Paytm, or any UPI payment app.
+                </li>
+                <li>
+                  Tap <b>Scan & Pay</b> and choose
+                  <b>Upload QR from Gallery</b>.
+                </li>
+                <li>Select the screenshot containing the QR code.</li>
+                <li>Complete the payment.</li>
+                <li>Enter the exact UPI Transaction ID below.</li>
+                <li>
+                  <b>Orders with invalid Transaction IDs will be rejected.</b>
+                </li>
+              </ul>
+            </div>
 
-    <div class="payment-guidelines">
-        <h3>📌 Payment Instructions</h3>
-        <ul>
-            <li>Fill all your details before making the payment.</li>
-            <li>If you are using a mobile phone, take a screenshot of this QR after filling all the details.</li>
-            <li>Open PhonePe, Google Pay, Paytm, or any UPI payment app.</li>
-            <li>Tap <b>Scan & Pay</b> and choose <b>Upload QR from Gallery</b>.</li>
-            <li>Select the screenshot containing the QR code.</li>
-            <li>Complete the payment.</li>
-            <li>Enter the exact UPI Transaction ID below.</li>
-            <li><b>Orders with invalid Transaction IDs will be rejected.</b></li>
-        </ul>
-    </div>
+            <div id="qr-code" class="qr-code"></div>
 
-    <div id="qr-code" class="qr-code"></div>
-
-    <label for="upi">
-        UPI Transaction ID (for payment confirmation):
-    </label><br />
-    <input
-        type="text"
-        id="upi"
-        placeholder="Enter UPI Transaction ID"
-        required
-    />
-</div>
+            <label for="upi">
+              UPI Transaction ID (for payment confirmation): </label
+            ><br />
+            <input
+              type="text"
+              id="upi"
+              placeholder="Enter UPI Transaction ID"
+              required
+            />
+          </div>
         </div>
 
         <button type="submit">Submit Order</button>
@@ -937,42 +953,42 @@
       >
 
       <!-- Instagram Floating Button -->
-<a
-  href="https://instagram.com/soul.101296"
-  class="instagram-float"
-  target="_blank"
-  title="Follow me on Instagram"
->
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-    alt="Instagram"
-  />
-</a>
+      <a
+        href="https://instagram.com/soul.101296"
+        class="instagram-float"
+        target="_blank"
+        title="Follow me on Instagram"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+          alt="Instagram"
+        />
+      </a>
 
-<!-- WhatsApp Floating Button -->
-<a
-  href="https://wa.me/917981495492"
-  class="whatsapp-float"
-  target="_blank"
-  title="Chat with me on WhatsApp"
->
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-    alt="WhatsApp"
-  />
-</a>
-    <!-- YouTube Floating Button -->
-<a
-  href="https://youtube.com/@Soul-in-shades-1012"
-  class="youtube-float"
-  target="_blank"
-  title="Subscribe on YouTube"
->
-  <img
-    src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
-    alt="YouTube"
-  />
-</a>
+      <!-- WhatsApp Floating Button -->
+      <a
+        href="https://wa.me/917981495492"
+        class="whatsapp-float"
+        target="_blank"
+        title="Chat with me on WhatsApp"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+          alt="WhatsApp"
+        />
+      </a>
+      <!-- YouTube Floating Button -->
+      <a
+        href="https://youtube.com/@Soul-in-shades-1012"
+        class="youtube-float"
+        target="_blank"
+        title="Subscribe on YouTube"
+      >
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+          alt="YouTube"
+        />
+      </a>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -990,10 +1006,73 @@
       let deliveryCharge = 35;
       let charge = 35;
 
+      const PINCODE_API = "https://api.pincodeapi.in/api/v1/pincode";
+      const ORIGIN_PINCODE = "530052";
+
+      function haversine(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Earth's radius in kilometers
+
+        const toRadians = (degrees) => (degrees * Math.PI) / 180;
+
+        const φ1 = toRadians(lat1);
+        const φ2 = toRadians(lat2);
+        const Δφ = toRadians(lat2 - lat1);
+        const Δλ = toRadians(lon2 - lon1);
+
+        const a =
+          Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+          Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return R * c;
+      }
+
+      const getFirstPincodeRecord = async (pincode) => {
+        const response = await fetch(`${PINCODE_API}/${pincode}`);
+        if (!response.ok) throw new Error("Pincode lookup failed");
+
+        const result = await response.json();
+        const record =
+          result?.status === "success"
+            ? result.data?.find(
+                (item) =>
+                  item.latitude !== null &&
+                  item.longitude !== null &&
+                  item.latitude !== "" &&
+                  item.longitude !== "" &&
+                  Number.isFinite(Number(item.latitude)) &&
+                  Number.isFinite(Number(item.longitude)),
+              )
+            : null;
+        if (
+          !record ||
+          !Number.isFinite(record.latitude) ||
+          !Number.isFinite(record.longitude)
+        ) {
+          throw new Error("No coordinates found for this pincode");
+        }
+
+        return {
+          ...record,
+          latitude: Number(record.latitude),
+          longitude: Number(record.longitude),
+        };
+      };
+
+      const getDeliveryCharge = (distanceKm) => {
+        if (distanceKm <= 50) return 35;
+        if (distanceKm < 100) return 50;
+        if (distanceKm < 200) return 70;
+        if (distanceKm < 1000) return 100;
+        if (distanceKm < 2000) return 200;
+        return null;
+      };
+
       document.getElementById("photo").addEventListener("change", function () {
         const file = this.files[0];
-        if (file && file.size > 5 * 1024 * 1024) {
-          alert("Please upload an image smaller than 5 MB.");
+        if (file && file.size > 10 * 1024 * 1024) {
+          alert("Please upload an image smaller than 10 MB.");
           this.value = "";
         }
       });
@@ -1042,7 +1121,7 @@
             alert("Please enter a valid UPI Transaction ID.");
             resetSubmit(submitBtn);
             return;
-            }
+          }
 
           const photoFile = document.getElementById("photo").files[0];
 
@@ -1099,7 +1178,7 @@
             } catch (error) {
               console.error("Email sending failed:", error);
               alert(
-                "❌ Failed to send confirmation email. Please contact soulinshades1@gmail.com directly."
+                "❌ Failed to send confirmation email. Please contact soulinshades1@gmail.com directly.",
               );
               resetSubmit(submitBtn);
             }
@@ -1125,43 +1204,56 @@
         alert("UPI ID copied: " + upiText);
       }
 
-      checkPostBtn.addEventListener("click", () => {
+      checkPostBtn.addEventListener("click", async () => {
         const pincode = document.getElementById("pincode").value.trim();
-      
+
         if (!/^\d{6}$/.test(pincode)) {
           postResult.textContent = "Please enter a valid 6-digit pincode.";
           postResult.style.color = "red";
           return;
-  }
+        }
 
-        // Visakhapatnam District
-        if (
-          pincode.startsWith("530") ||
-          pincode.startsWith("531")
-        ) {
-          deliveryCharge = 35;
-  }
+        checkPostBtn.disabled = true;
+        postResult.style.color = "var(--dark)";
+        postResult.textContent = "Calculating delivery distance...";
 
-  // Andhra Pradesh (excluding Vizag)
-        else if (
-          pincode.startsWith("51") ||
-          pincode.startsWith("52") ||
-          pincode.startsWith("53")
-  ) {
-    deliveryCharge = 45;
-  }
+        try {
+          const [origin, destination] = await Promise.all([
+            getFirstPincodeRecord(ORIGIN_PINCODE),
+            getFirstPincodeRecord(pincode),
+          ]);
 
-  // Rest of India
-        else {
-          deliveryCharge = 65;
-  }
+          let distanceKm = haversine(
+            origin.latitude,
+            origin.longitude,
+            destination.latitude,
+            destination.longitude,
+          );
+          distanceKm += distanceKm * 0.18;
+          const calculatedCharge = getDeliveryCharge(distanceKm);
 
-    charge = baseCharge + deliveryCharge;
-  
-    postResult.style.color = "green";
-    postResult.textContent =
-      `Estimated total: ₹${charge} (Base ₹${baseCharge} + Delivery ₹${deliveryCharge})`;
-});
+          if (calculatedCharge === null) {
+            postResult.style.color = "red";
+            postResult.textContent = `Delivery is unavailable beyond 2000 km (${distanceKm.toFixed(1)} km).`;
+            return;
+          }
+
+          deliveryCharge = calculatedCharge;
+          charge = baseCharge + deliveryCharge;
+
+          postResult.style.color = "green";
+          postResult.textContent = `Estimated distance: ${distanceKm.toFixed(1)} km. Total: Rs.${charge} (Base Rs.${baseCharge} + Delivery Rs.${deliveryCharge})`;
+          postResult.textContent = `Estimated total: ₹${charge} (Base ₹${baseCharge} + Delivery ₹${deliveryCharge})`;
+          postResult.textContent = `Estimated distance: ${distanceKm.toFixed(1)} km. Total: Rs.${charge} (Base Rs.${baseCharge} + Delivery Rs.${deliveryCharge})`;
+        } catch (error) {
+          console.error("Pincode lookup failed:", error);
+          postResult.style.color = "red";
+          postResult.textContent =
+            "Unable to calculate delivery cost. Please try again.";
+        } finally {
+          checkPostBtn.disabled = false;
+        }
+      });
 
       function generateQR() {
         const text = `upi://pay?pa=7981495492@ibl&pn=Deepak&am=${charge}&cu=INR&tn=DrawingFee`;
@@ -1176,66 +1268,57 @@
         });
       }
     </script>
-<script type="module">
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        query,
+        orderBy,
+        limit,
+      } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-import {
-    getFirestore,
-    collection,
-    getDocs,
-    query,
-    orderBy,
-    limit
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
+        authDomain: "soul-in-shades.firebaseapp.com",
+        projectId: "soul-in-shades",
+        storageBucket: "soul-in-shades.firebasestorage.app",
+        messagingSenderId: "243873489165",
+        appId: "1:243873489165:web:4737be5809db7bca2c5044",
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-const firebaseConfig = {
+      async function loadMiniReviews() {
+        const track = document.getElementById("reviewsTrack");
 
-    apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
-    authDomain: "soul-in-shades.firebaseapp.com",
-    projectId: "soul-in-shades",
-    storageBucket: "soul-in-shades.firebasestorage.app",
-    messagingSenderId: "243873489165",
-    appId: "1:243873489165:web:4737be5809db7bca2c5044"
+        const q = query(
+          collection(db, "reviews"),
+          orderBy("createdAt", "desc"),
+          limit(10),
+        );
 
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+        const snapshot = await getDocs(q);
 
-async function loadMiniReviews() {
+        let html = "";
 
-    const track = document.getElementById("reviewsTrack");
+        snapshot.forEach((doc) => {
+          const data = doc.data();
 
-    const q = query(
-        collection(db, "reviews"),
-        orderBy("createdAt", "desc"),
-        limit(10)
-    );
-
-    const snapshot = await getDocs(q);
-
-    let html = "";
-
-    snapshot.forEach(doc => {
-
-        const data = doc.data();
-
-        html += `
+          html += `
         <div class="mini-review">
             <h4>${data.name}</h4>
             <div class="stars">${"★".repeat(data.rating)}</div>
             <p>${data.reviewText}</p>
         </div>`;
-    });
+        });
 
-    track.innerHTML = html + html;
-}
+        track.innerHTML = html + html;
+      }
 
-loadMiniReviews();
-
-</script>
+      loadMiniReviews();
+    </script>
   </body>
-   
 </html>

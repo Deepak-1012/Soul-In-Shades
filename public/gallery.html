@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -102,7 +102,9 @@
         border-radius: 10px;
         border: 2px solid var(--gold);
         box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
         cursor: pointer;
         break-inside: avoid; /* ensures Pinterest-style stacking */
       }
@@ -115,7 +117,9 @@
       .masonry img {
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
       }
 
       .masonry img.visible {
@@ -189,7 +193,9 @@
         justify-content: center;
         align-items: center;
         z-index: 999;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
       .whatsapp-float:hover {
@@ -214,18 +220,20 @@
         justify-content: center;
         align-items: center;
         z-index: 999;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
 
-.instagram-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
-}
+      .instagram-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+      }
 
-.instagram-float img {
-  width: 28px;
-  height: 28px;
-}
+      .instagram-float img {
+        width: 28px;
+        height: 28px;
+      }
       .youtube-float {
         position: fixed;
         width: 50px;
@@ -240,16 +248,16 @@
         align-items: center;
         z-index: 999;
         transition: transform 0.3s ease;
-}
+      }
 
-.youtube-float:hover {
-  transform: scale(1.1);
-}
+      .youtube-float:hover {
+        transform: scale(1.1);
+      }
 
-.youtube-float img {
-  width: 32px;
-  height: 32px;
-}
+      .youtube-float img {
+        width: 32px;
+        height: 32px;
+      }
     </style>
   </head>
   <body>
@@ -404,8 +412,8 @@
         <img
           src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
           alt="YouTube"
-      />
-    </a>
+        />
+      </a>
       <!-- Instagram Floating Button -->
       <a
         href="https://instagram.com/soul.101296"
@@ -416,8 +424,8 @@
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
           alt="Instagram"
-      />
-    </a>
+        />
+      </a>
     </footer>
 
     <script>
@@ -450,7 +458,7 @@
             }
           });
         },
-        { threshold: 0.2 }
+        { threshold: 0.2 },
       );
 
       galleryImages.forEach((img) => {

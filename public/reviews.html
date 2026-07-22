@@ -1,310 +1,295 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Customer Reviews | Soul In Shades</title>
 
     <style>
-	/* Lightbox */
+      /* Lightbox */
 
-	.lightbox{
-    	display:none;
-    	position:fixed;
-    	inset:0;
-    	background:rgba(0,0,0,0.85);
-    	z-index:9999;
-    	justify-content:center;
-    	align-items:center;
-    	padding:20px;
-}
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
 
-	.lightbox-content{
-    	position:relative;
-    	max-width:700px;
-    	width:100%;
-    	background:white;
-    	border-radius:15px;
-    	overflow:hidden;
+      .lightbox-content {
+        position: relative;
+        max-width: 700px;
+        width: 100%;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
 
-    	border:3px solid gold;
+        border: 3px solid gold;
 
-    	box-shadow:
-        	0 0 15px gold,
-        	0 0 30px gold,
-        	0 0 50px rgba(255,215,0,0.7);
-}
+        box-shadow:
+          0 0 15px gold,
+          0 0 30px gold,
+          0 0 50px rgba(255, 215, 0, 0.7);
+      }
 
-	.lightbox-content img{
-    	width:100%;
-    	max-height:70vh;
-    	object-fit:contain;
-    	background:#fff8e1;
-}
+      .lightbox-content img {
+        width: 100%;
+        max-height: 70vh;
+        object-fit: contain;
+        background: #fff8e1;
+      }
 
-	.lightbox-details{
-    	padding:20px;
-    	text-align:center;
-}
+      .lightbox-details {
+        padding: 20px;
+        text-align: center;
+      }
 
-	.lightbox-details h3{
-    	margin:0 0 10px;
-}
+      .lightbox-details h3 {
+        margin: 0 0 10px;
+      }
 
-	.lightbox-details p{
-    	margin-top:10px;
-    	color:#444;
-    	line-height:1.6;
-}
+      .lightbox-details p {
+        margin-top: 10px;
+        color: #444;
+        line-height: 1.6;
+      }
 
-	.close-lightbox{
-    	position:absolute;
-    	top:10px;
-    	right:15px;
-    	font-size:35px;
-    	font-weight:bold;
-    	color:white;
-    	background:#ff9800;
-    	width:45px;
-    	height:45px;
-    	border-radius:50%;
-    	display:flex;
-    	justify-content:center;
-    	align-items:center;
-    	cursor:pointer;
-    	z-index:10000;
-}
+      .close-lightbox {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 35px;
+        font-weight: bold;
+        color: white;
+        background: #ff9800;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 10000;
+      }
 
-	.close-lightbox:hover{
-    	background:#e68900;
-}
+      .close-lightbox:hover {
+        background: #e68900;
+      }
 
-	.review-image{
-    	width:100%;
-    	max-width:300px;
-    	border-radius:10px;
-    	margin-top:10px;
-    	cursor:pointer;
-    	transition:0.3s;
-}
+      .review-image {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
 
-	.review-image:hover{
-    	transform:scale(1.03);
-}
-        body{
-            font-family: Arial, sans-serif;
-            background:#fff8e1;
-            margin:0;
-            padding:20px;
-        }
+      .review-image:hover {
+        transform: scale(1.03);
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #fff8e1;
+        margin: 0;
+        padding: 20px;
+      }
 
-        .container{
-            max-width:900px;
-            margin:auto;
-        }
-	.home-btn{
-    	display:inline-block;
-    	padding:10px 15px;
-    	background:#ff9800;
-    	color:white;
-    	text-decoration:none;
-    	border-radius:5px;
-    	margin-bottom:20px;
-	}
-        h1{
-            text-align:center;
-            color:#333;
-        }
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+      .home-btn {
+        display: inline-block;
+        padding: 10px 15px;
+        background: #ff9800;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
 
-        .review-form{
-            background:white;
-            padding:20px;
-            border-radius:10px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom:30px;
-        }
+      .review-form {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
 
-        input, textarea{
-            width:100%;
-            padding:12px;
-            margin:10px 0;
-            border:1px solid #ccc;
-            border-radius:5px;
-            box-sizing:border-box;
-        }
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
 
-        textarea{
-            height:120px;
-            resize:none;
-        }
+      textarea {
+        height: 120px;
+        resize: none;
+      }
 
-        .stars{
-            font-size:30px;
-            cursor:pointer;
-            color:#ccc;
-            margin:10px 0;
-        }
+      .stars {
+        font-size: 30px;
+        cursor: pointer;
+        color: #ccc;
+        margin: 10px 0;
+      }
 
-        .stars span.active{
-            color:gold;
-        }
+      .stars span.active {
+        color: gold;
+      }
 
-        button{
-            background:#ff9800;
-            color:white;
-            border:none;
-            padding:12px 25px;
-            border-radius:5px;
-            cursor:pointer;
-            font-size:16px;
-        }
+      button {
+        background: #ff9800;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
 
-        button:hover{
-            background:#e68900;
-        }
+      button:hover {
+        background: #e68900;
+      }
 
-        .review-card{
-            background:white;
-            padding:15px;
-            margin-bottom:15px;
-            border-radius:10px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-        }
+      .review-card {
+        background: white;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-        .rating{
-            color:gold;
-            font-size:20px;
-        }
+      .rating {
+        color: gold;
+        font-size: 20px;
+      }
 
-        #averageRating{
-            text-align:center;
-            font-size:22px;
-            margin-bottom:20px;
-        }
+      #averageRating {
+        text-align: center;
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html">🏠 Back to Home</a>
+      <h1>⭐ Customer Reviews</h1>
 
-<div class="container">
-	
-     <a href="index.html">🏠 Back to Home</a>
-    <h1>⭐ Customer Reviews</h1>
+      <div id="averageRating">Average Rating: Loading...</div>
 
-    <div id="averageRating">
-        Average Rating: Loading...
-    </div>
-
-    <div class="review-form">
-
-        <input type="text" id="name" placeholder="Your Name">
+      <div class="review-form">
+        <input type="text" id="name" placeholder="Your Name" />
 
         <div class="stars" id="stars">
-            <span data-value="1">★</span>
-            <span data-value="2">★</span>
-            <span data-value="3">★</span>
-            <span data-value="4">★</span>
-            <span data-value="5">★</span>
+          <span data-value="1">★</span>
+          <span data-value="2">★</span>
+          <span data-value="3">★</span>
+          <span data-value="4">★</span>
+          <span data-value="5">★</span>
         </div>
 
-	<textarea id="reviewText" placeholder="Write your review"></textarea>
+        <textarea id="reviewText" placeholder="Write your review"></textarea>
 
-	<input
-    	  type="file"
-    	  id="reviewImage"
-    	  accept="image/png,image/jpeg,image/webp">
+        <input
+          type="file"
+          id="reviewImage"
+          accept="image/png,image/jpeg,image/webp"
+        />
 
-	<button id="submitBtn" onclick="submitReview()">
-    	  Submit Review
-	</button>
+        <button id="submitBtn" onclick="submitReview()">Submit Review</button>
+      </div>
 
+      <div id="reviewsContainer"></div>
     </div>
-
-    <div id="reviewsContainer"></div>
-
-</div>
-<div id="reviewLightbox" class="lightbox">
-    <div class="lightbox-content">
+    <div id="reviewLightbox" class="lightbox">
+      <div class="lightbox-content">
         <span class="close-lightbox">&times;</span>
 
-        <img id="lightboxImage" src="" alt="Review Image">
+        <img id="lightboxImage" src="" alt="Review Image" />
 
         <div class="lightbox-details">
-            <h3 id="lightboxName"></h3>
-            <div id="lightboxRating"></div>
-            <p id="lightboxReview"></p>
+          <h3 id="lightboxName"></h3>
+          <div id="lightboxRating"></div>
+          <p id="lightboxReview"></p>
         </div>
+      </div>
     </div>
-</div>
-<script type="module">
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        query,
+        orderBy,
+      } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs,
-    query,
-    orderBy
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
+        authDomain: "soul-in-shades.firebaseapp.com",
+        projectId: "soul-in-shades",
+        storageBucket: "soul-in-shades.firebasestorage.app",
+        messagingSenderId: "243873489165",
+        appId: "1:243873489165:web:4737be5809db7bca2c5044",
+      };
 
-const firebaseConfig = {
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-    apiKey: "AIzaSyCZo_5V2MKjr_nJnytoDrqIDTcTY3NjsM8",
-    authDomain: "soul-in-shades.firebaseapp.com",
-    projectId: "soul-in-shades",
-    storageBucket: "soul-in-shades.firebasestorage.app",
-    messagingSenderId: "243873489165",
-    appId: "1:243873489165:web:4737be5809db7bca2c5044"
+      let selectedRating = 0;
 
-};
+      const stars = document.querySelectorAll("#stars span");
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          selectedRating = parseInt(star.dataset.value);
 
-let selectedRating = 0;
+          stars.forEach((s) => s.classList.remove("active"));
 
-const stars = document.querySelectorAll("#stars span");
-
-stars.forEach(star => {
-    star.addEventListener("click", () => {
-        selectedRating = parseInt(star.dataset.value);
-
-        stars.forEach(s => s.classList.remove("active"));
-
-        for(let i = 0; i < selectedRating; i++){
+          for (let i = 0; i < selectedRating; i++) {
             stars[i].classList.add("active");
-        }
-    });
-});
+          }
+        });
+      });
 
-window.submitReview = async function () {
-    const submitBtn = document.getElementById("submitBtn");
+      window.submitReview = async function () {
+        const submitBtn = document.getElementById("submitBtn");
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Uploading...";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Uploading...";
 
-    try {
+        try {
+          const name = document.getElementById("name").value.trim();
+          const reviewText = document.getElementById("reviewText").value.trim();
+          const file = document.getElementById("reviewImage").files[0];
 
-        const name = document.getElementById("name").value.trim();
-        const reviewText = document.getElementById("reviewText").value.trim();
-        const file = document.getElementById("reviewImage").files[0];
+          let imageUrl = "";
 
-        let imageUrl = "";
-
-        if (!name || !reviewText || selectedRating === 0) {
+          if (!name || !reviewText || selectedRating === 0) {
             alert("Please fill all fields and select a rating.");
             return;
-        }
-    
+          }
 
-        if (file) {
-
+          if (file) {
             if (file.size > 2 * 1024 * 1024) {
-                alert("Please upload an image smaller than 2 MB.");
-                return;
+              alert("Please upload an image smaller than 2 MB.");
+              return;
             }
 
             const formData = new FormData();
@@ -312,100 +297,90 @@ window.submitReview = async function () {
             formData.append("upload_preset", "review_uploads");
 
             const response = await fetch(
-                "https://api.cloudinary.com/v1_1/mx5v8ppn/image/upload",
-                {
-                    method: "POST",
-                    body: formData
-                }
+              "https://api.cloudinary.com/v1_1/mx5v8ppn/image/upload",
+              {
+                method: "POST",
+                body: formData,
+              },
             );
 
             const result = await response.json();
 
             if (!result.secure_url) {
-                console.error(result);
-                alert("Image upload failed.");
-                return;
+              console.error(result);
+              alert("Image upload failed.");
+              return;
             }
 
             imageUrl = result.secure_url;
-        }
+          }
 
-        await addDoc(collection(db, "reviews"), {
+          await addDoc(collection(db, "reviews"), {
             name: name,
             reviewText: reviewText,
             rating: selectedRating,
             imageUrl: imageUrl,
-            createdAt: Date.now()
-        });
+            createdAt: Date.now(),
+          });
 
-        alert("Review submitted successfully!");
+          alert("Review submitted successfully!");
 
-        document.getElementById("name").value = "";
-        document.getElementById("reviewText").value = "";
-        document.getElementById("reviewImage").value = "";
+          document.getElementById("name").value = "";
+          document.getElementById("reviewText").value = "";
+          document.getElementById("reviewImage").value = "";
 
-        selectedRating = 0;
-        stars.forEach(s => s.classList.remove("active"));
+          selectedRating = 0;
+          stars.forEach((s) => s.classList.remove("active"));
 
-        loadReviews();
-	setTimeout(() => {
+          loadReviews();
+          setTimeout(() => {
+            document
+              .querySelector(".close-lightbox")
+              ?.addEventListener("click", () => {
+                document.getElementById("reviewLightbox").style.display =
+                  "none";
+              });
 
-    document.querySelector(".close-lightbox")
-    ?.addEventListener("click", () => {
-
-        document.getElementById("reviewLightbox").style.display = "none";
-
-    });
-
-    document.getElementById("reviewLightbox")
-    ?.addEventListener("click", (e) => {
-
-        if (e.target.id === "reviewLightbox") {
-            document.getElementById("reviewLightbox").style.display = "none";
+            document
+              .getElementById("reviewLightbox")
+              ?.addEventListener("click", (e) => {
+                if (e.target.id === "reviewLightbox") {
+                  document.getElementById("reviewLightbox").style.display =
+                    "none";
+                }
+              });
+          }, 500);
+        } catch (err) {
+          console.error(err);
+          alert("Error submitting review.");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Submit Review";
         }
+      };
 
-    });
+      async function loadReviews() {
+        const reviewsContainer = document.getElementById("reviewsContainer");
 
-}, 500);
+        reviewsContainer.innerHTML = "";
 
-    } catch (err) {
-        console.error(err);
-        alert("Error submitting review.");
+        const q = query(
+          collection(db, "reviews"),
+          orderBy("createdAt", "desc"),
+        );
 
-    } finally {
+        const snapshot = await getDocs(q);
 
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Submit Review";
+        let total = 0;
+        let count = 0;
 
-    }
+        snapshot.forEach((doc) => {
+          const data = doc.data();
 
-}
+          total += data.rating;
+          count++;
 
-async function loadReviews(){
-
-    const reviewsContainer =
-        document.getElementById("reviewsContainer");
-
-    reviewsContainer.innerHTML="";
-
-    const q = query(
-        collection(db,"reviews"),
-        orderBy("createdAt","desc")
-    );
-
-    const snapshot = await getDocs(q);
-
-    let total = 0;
-    let count = 0;
-
-    snapshot.forEach(doc => {
-
-        const data = doc.data();
-
-        total += data.rating;
-        count++;
-
-reviewsContainer.innerHTML += `
+          reviewsContainer.innerHTML += `
 <div class="review-card">
 
     <h3>${data.name}</h3>
@@ -417,7 +392,7 @@ reviewsContainer.innerHTML += `
     <p>${data.reviewText}</p>
 
 ${
-    data.imageUrl
+  data.imageUrl
     ? `
     <img
         src="${data.imageUrl}"
@@ -425,9 +400,9 @@ ${
         class="review-image"
         onclick="openLightbox(
             '${data.imageUrl}',
-            '${data.name.replace(/'/g,"\\'")}',
+            '${data.name.replace(/'/g, "\\'")}',
             '${"★".repeat(data.rating)}',
-            '${data.reviewText.replace(/'/g,"\\'")}'
+            '${data.reviewText.replace(/'/g, "\\'")}'
         )"
     >
     `
@@ -435,49 +410,41 @@ ${
 }
 </div>
 `;
-    });
+        });
 
-    document.getElementById("averageRating").innerHTML =
-        count > 0
-        ? `Average Rating: ${(total/count).toFixed(1)} / 5 ⭐`
-        : "No Reviews Yet";
-}
+        document.getElementById("averageRating").innerHTML =
+          count > 0
+            ? `Average Rating: ${(total / count).toFixed(1)} / 5 ⭐`
+            : "No Reviews Yet";
+      }
 
-loadReviews();
-window.openLightbox = function(image,name,rating,review){
+      loadReviews();
+      window.openLightbox = function (image, name, rating, review) {
+        document.getElementById("lightboxImage").src = image;
 
-    document.getElementById("lightboxImage").src = image;
+        document.getElementById("lightboxName").textContent = name;
 
-    document.getElementById("lightboxName").textContent = name;
+        document.getElementById("lightboxRating").innerHTML =
+          `<span style="color:gold;font-size:22px">${rating}</span>`;
 
-    document.getElementById("lightboxRating").innerHTML =
-        `<span style="color:gold;font-size:22px">${rating}</span>`;
+        document.getElementById("lightboxReview").textContent = review;
 
-    document.getElementById("lightboxReview").textContent =
-        review;
+        document.getElementById("reviewLightbox").style.display = "flex";
+      };
 
-    document.getElementById("reviewLightbox").style.display =
-        "flex";
-};
+      document
+        .querySelector(".close-lightbox")
+        .addEventListener("click", () => {
+          document.getElementById("reviewLightbox").style.display = "none";
+        });
 
-document.querySelector(".close-lightbox")
-.addEventListener("click", () => {
-
-    document.getElementById("reviewLightbox").style.display =
-        "none";
-
-});
-
-document.getElementById("reviewLightbox")
-.addEventListener("click", (e) => {
-
-    if(e.target.id === "reviewLightbox"){
-
-        document.getElementById("reviewLightbox").style.display =
-            "none";
-    }
-});
-
-</script>
-</body>
+      document
+        .getElementById("reviewLightbox")
+        .addEventListener("click", (e) => {
+          if (e.target.id === "reviewLightbox") {
+            document.getElementById("reviewLightbox").style.display = "none";
+          }
+        });
+    </script>
+  </body>
 </html>
