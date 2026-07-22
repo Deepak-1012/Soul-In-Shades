@@ -18,12 +18,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Gmail setup
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  auth: {
-    user: "soulinshades1@gmail.com",
-    pass: "knwtsvqsaadbzoyr",
-  },
-});
-
+auth: {
+  user: process.env.MAIL_ID,
+  pass: process.env.EMAIL_PASSWORD,
+}
 transporter.verify((error, success) => {
   if (error) {
     console.log("Email Error:", error);
