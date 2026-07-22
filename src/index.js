@@ -24,8 +24,18 @@ const haversine = (lat1, lon1, lat2, lon2) => {
 };
 
 const getFirstPincodeRecord = async (pincode) => {
-  const response = await fetch(`${PINCODE_API}/${pincode}`);
-  if (!response.ok) throw new Error("Pincode lookup failed");
+  const response = await fetch(`${PINCODE_API}/${pincode}`, {
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!response.ok) {
+    const body = await response.text().catch(() => "");
+    console.error("Pincode API error", {
+      pincode,
+      status: response.status,
+      body: body.slice(0, 300),
+    });
+    throw new Error(`Pincode lookup failed with status ${response.status}`);
+  }
 
   const result = await response.json();
   const record =
@@ -73,19 +83,17 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // Gmail setup
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.MAIL_ID,
     pass: process.env.EMAIL_PASSWORD,
   },
-});
-
-transporter.verify((error) => {
-  if (error) {
-    console.log("Email Error:", error);
-  } else {
-    console.log("Gmail connection successful");
-  }
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 20000,
 });
 
 // Home
