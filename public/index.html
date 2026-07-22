@@ -1149,13 +1149,18 @@
             };
 
             try {
-              await fetch("/", {
+              const response = await fetch("/", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify(params),
               });
+
+              const result = await response.json().catch(() => ({}));
+              if (!response.ok || result.success !== true) {
+                throw new Error(result.error || "Order email failed");
+              }
 
               // ✅ Show success tick
               const spinner = document.querySelector(".spinner");
