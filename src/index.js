@@ -1,38 +1,61 @@
+require("dotenv").config();
+console.log("MAIL_ID:", process.env.MAIL_ID);
+console.log("PASSWORD EXISTS:", !!process.env.EMAIL_PASSWORD);
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 const path = require("path");
-require("dotenv").config();
 
 const app = express();
+
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
+// Your old simple website files
 app.use(express.static(path.join(__dirname, "../public")));
 
+// Gmail setup
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.MAIL_ID,
-    pass: process.env.EMAIL_PASSWORD,
+    user: "soulinshades1@gmail.com",
+    pass: "knwtsvqsaadbzoyr",
   },
 });
 
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("Email Error:", error);
+  } else {
+    console.log("Gmail connection successful");
+  }
+});
+
+
+// Home
 app.get("/", (req, res) => {
-  return res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+
+// Gallery
 app.get("/gallery", (req, res) => {
-  return res.sendFile(path.join(__dirname, "../public/gallery.html"));
+  res.sendFile(path.join(__dirname, "../public/gallery.html"));
 });
 
+
+// Reviews
 app.get("/reviews", (req, res) => {
-  return res.sendFile(path.join(__dirname, "../public/reviews.html"));
+  res.sendFile(path.join(__dirname, "../public/reviews.html"));
 });
 
 
+// Order email
 app.post("/", async (req, res) => {
+
   try {
+
     const {
       name,
       persons,
@@ -44,69 +67,83 @@ app.post("/", async (req, res) => {
       tid,
       total_charge,
       delivery_charge,
-      base_charge,
+      base_charge
     } = req.body;
 
-    if (
-      !name ||
-      !persons ||
-      !number ||
-      !mail ||
-      !add ||
-      !pincode ||
-      !img ||
-      !tid ||
-      !base_charge ||
-      !delivery_charge ||
-      !total_charge
-    ) {
-      return res.status(400).json({ error: "All fields are required" });
+
+    const message = `
+📦 New Soul In Shades Order
+
+Name: ${name}
+Email: ${mail}
+Phone: ${number}
+
+Address:
+${add}
+
+Pincode:
+${pincode}
+
+Persons:
+${persons}
+
+Transaction ID:
+${tid}
+
+Base Price:
+₹${base_charge}
+
+Delivery:
+₹${delivery_charge}
+
+Total:
+₹${total_charge}
+`;
+
+
+    const base64Data = img.includes("base64,")
+      ? img.split("base64,")[1]
+      : img;
+
+
+const info = await transporter.sendMail({
+  from: "soulinshades1@gmail.com",
+  to: [
+    mail,
+    "soulinshades1@gmail.com"
+  ],
+  subject: "🧾 Soul In Shades Order Confirmation",
+  text: message,
+  attachments: [
+    {
+      filename: "customer-photo.jpg",
+      content: base64Data,
+      encoding: "base64"
     }
+  ]
+});
 
-    const body = `
-📦 Thank you for your order!
+console.log("Mail sent:", info.response);
 
-    👤 Your Order Details
-    ----------------------
-    Name: ${name}
-    Email: ${mail}
-    Phone: ${number}
-    Address: ${add}
-    Pincode: ${pincode}
-    Persons: ${persons}
-    Transaction ID: ${tid}
-    Base Price: ${base_charge}
-    Delivery Price: ${delivery_charge}
-    Total Price: ${total_charge}
 
-    We'll contact you soon to confirm your order!
-    `;
-
-    const base64Data = img.includes("base64,") ? img.split("base64,")[1] : img;
-
-    await transporter.sendMail({
-      from: process.env.MAIL_ID,
-      to: [mail, process.env.MAIL_ID],
-      subject: "🧾 Your Order Confirmation",
-      text: body,
-      attachments: [
-        {
-          filename: "order-image.jpg",
-          content: base64Data,
-          encoding: "base64",
-        },
-      ],
+    res.json({
+      success:true,
+      message:"Order email sent"
     });
 
-    res
-      .status(200)
-      .json({ message: "Order received and email sent successfully" });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+
+  } catch(error){
+
+    console.log(error);
+
+    res.status(500).json({
+      success:false,
+      error:"Email failed"
+    });
+
   }
+
 });
 
-app.listen(3000, () => {
-  console.log("Server started");
-});
+
+module.exports = app;
